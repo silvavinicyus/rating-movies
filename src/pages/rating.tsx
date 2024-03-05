@@ -13,7 +13,7 @@ interface RatingProps {
 export function Rating({movies}: RatingProps) {
   const {data: userMoviesResponse} = useQuery<IMovieResponse>({
     queryFn: async () => {
-      const response = await fetch('http://localhost:3333/movies/user')
+      const response = await fetch('http://localhost:3000/movies/user')
       const data = await response.json()
 
       return data

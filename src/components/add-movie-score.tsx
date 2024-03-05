@@ -27,7 +27,7 @@ export function AddMovieScore ({movies}: AddMovieScoreProps) {
 
   const { mutateAsync } = useMutation({
     mutationFn: async ({ score }: AddMovieScoreSchema) => {
-      await fetch(`http://localhost:3333/movies/${movie_id}`, {
+      await fetch(`http://localhost:3000/movies/${movie_id}`, {
         method: 'POST',
         body: JSON.stringify({
           score: +score

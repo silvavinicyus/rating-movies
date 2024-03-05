@@ -20,7 +20,7 @@ export function Home() {
 
   const {data: moviesResponse} = useQuery<IMovieResponse>({
     queryFn: async () => {
-      const response = await fetch('http://localhost:3333/movies')
+      const response = await fetch('http://localhost:3000/movies')
       const data = await response.json()
 
       return data

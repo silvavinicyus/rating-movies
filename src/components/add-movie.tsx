@@ -21,7 +21,7 @@ export function AddMovie() {
 
   const { mutateAsync } = useMutation({
     mutationFn: async ({director, title}: AddMovieSchema) => {
-      await fetch('http://localhost:3333/movies', {
+      await fetch('http://localhost:3000/movies', {
         method: 'POST',
         body: JSON.stringify({
           title,
