@@ -4,13 +4,14 @@ import { PlusCircle } from "lucide-react";
 import { AddMovieScore } from "../components/add-movie-score";
 import { MovieCard } from "../components/movie-card";
 import { IMovie } from "../interfaces/movie";
+import { IMovieResponse } from '../interfaces/responses';
 
 interface RatingProps {
   movies: IMovie[] | undefined
 }
 
 export function Rating({movies}: RatingProps) {
-  const {data: userMoviesResponse} = useQuery<IMovie[]>({
+  const {data: userMoviesResponse} = useQuery<IMovieResponse>({
     queryFn: async () => {
       const response = await fetch('http://localhost:3333/movies/user')
       const data = await response.json()

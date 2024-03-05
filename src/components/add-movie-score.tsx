@@ -41,12 +41,12 @@ export function AddMovieScore ({movies}: AddMovieScoreProps) {
     }
   })
   
-  async function createTag({score, title}: AddMovieScoreSchema) {    
+  async function createMovieScore({score, title}: AddMovieScoreSchema) {    
     await mutateAsync({score, title})
   }
 
   return(        
-    <form className="w-full space-y-6 text-white" onSubmit={handleSubmit(createTag)}>
+    <form className="w-full space-y-6 text-white" onSubmit={handleSubmit(createMovieScore)}>
       <div className="space-y-2">
         <label className="text-sm font-medium block" htmlFor="title"> Titulo </label>
         

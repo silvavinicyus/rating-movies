@@ -4,10 +4,12 @@ import { GridTable } from '../components/grid-table'
 import { useState } from 'react'
 import { NavigationButton } from '../components/navigation-button'
 import { Rating } from './rating'
-import { IMovie } from '../interfaces/movie'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { IMovieResponse } from '../interfaces/responses'
+import * as Dialog from '@radix-ui/react-dialog'
+import { AddMovie } from '../components/add-movie'
 
-type IMovieResponse = IMovie[]
+
 
 export function Home() {  
   const [mainComponent, setMainComponent] = useState('grid')  
@@ -265,13 +267,30 @@ export function Home() {
 
 
             <div className='flex gap-1'>
-              <NavigationButton 
-                onClick={() => {}}
-                selected={false}
-                title='Adicionar Filme'
-             >
-              <PlusCircle className="size-4"/>
-             </NavigationButton>
+              <Dialog.Root>
+                <Dialog.Trigger asChild>
+                  <NavigationButton 
+                    onClick={() => {}}
+                    selected={false}
+                    title='Adicionar Filme'
+                  >
+                    <PlusCircle className="size-4"/>
+                  </NavigationButton>
+                </Dialog.Trigger>
+
+                <Dialog.DialogPortal>
+                  <Dialog.DialogOverlay className="fixed inset-0 bg-black/70" />
+                  <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
+                    <div className="space-y-3">
+                      <Dialog.Title className="text-xl font-bold text-white"> Crie um filme </Dialog.Title>
+                      <Dialog.Description className='text-sm text-zinc-500'> Por favor, adicione o nome do filme e seu diretor. </Dialog.Description>
+                    </div>
+
+                    <AddMovie />
+                  </Dialog.Content>
+                </Dialog.DialogPortal>
+              </Dialog.Root>
+              
       
 
               <NavigationButton 
