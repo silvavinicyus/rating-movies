@@ -27,6 +27,9 @@ export function AddMovie() {
           title,
           director
         }),
+        headers: {
+          'Content-Type': 'application/json'
+        } 
       })
     },
     onSuccess: () => {

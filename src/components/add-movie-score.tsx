@@ -31,7 +31,10 @@ export function AddMovieScore ({movies}: AddMovieScoreProps) {
         method: 'POST',
         body: JSON.stringify({
           score: +score
-        }),        
+        }),   
+        headers: {
+          'Content-Type': 'application/json'
+        }      
       })
     },
     onSuccess: () => {

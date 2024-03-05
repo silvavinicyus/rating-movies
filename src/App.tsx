@@ -19,26 +19,24 @@ function App() {
     resolver: zodResolver(loginSchema)
   })
 
-  async function handleLogin({email, password}: LoginSchema) {    
-    console.log({email, password})
-
+  async function handleLogin({email, password}: LoginSchema) {        
     try {
       const result = await fetch('http://localhost:3000/sessions', {
         method: 'POST',
         body: JSON.stringify({
           email,
           password
-        })        
-      })                  
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        } 
+      })  
 
       if (result.status === 202) {
         navigate('/home')        
       }
     } catch(err) {
       console.log(err)
-    } finally {
-      //to-do: remover esse finally, deixar por enquanto para teste
-      navigate('/home')
     }
   }
 
