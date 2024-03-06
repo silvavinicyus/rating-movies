@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# Ratting Movies Backend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse projeto busca resolver um desafio de construção de um frontend em react com as funcinalidades de login, criação de filmes, avaliação de filmes, e criação em massa (via arquivo json) para filmes e avaliações
 
-Currently, two official plugins are available:
+Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<table>
+  <thead>
+    <th> Tecnologia </th>
+    <th> Versão </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td> NodeJs </td>
+      <td> 18.1.0 </td>
+    </tr>   
+  </tbody>
+</table>
 
-## Expanding the ESLint configuration
+ ### Features
+ <ul>   
+   <li> Login </li>
+   <li> Criação de filme </li>
+   <li> Criação de avaliação de filme  </li>
+   <li> Atualização de avaliação de filme </li>
+   <li> Criação de avaliações em massa </li>
+   <li> Criação de filmes em massa </li>
+ </ul>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ ### Install and run
 
-- Configure the top-level `parserOptions` property like this:
+ <li>
+    Clone o presente repositório em seu computador
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+     git@github.com:silvavinicyus/rating-movies.git    
+ </li>
+ 
+ <li>
+    Instale as dependencias do projeto
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+     npm install    
+ </li>
+
+ <li>
+    Execute o frontend 
+
+     npm run dev   
+ </li>
