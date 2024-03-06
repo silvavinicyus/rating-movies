@@ -11,8 +11,7 @@ import { AddMovie } from '../components/add-movie'
 import { useNavigate } from 'react-router-dom'
 import { IUser } from '../interfaces/user'
 import { useAuth } from '../hooks/auth'
-
-
+import { ImportFile } from '../components/import-file'
 
 export function Home() {
   const [mainComponent, setMainComponent] = useState('grid')
@@ -124,14 +123,29 @@ export function Home() {
               </Dialog.Root>
               
       
+              <Dialog.Root>
+                <Dialog.Trigger asChild>
+                  <NavigationButton 
+                    onClick={() => {}}
+                    selected={false}
+                    title='Importar'
+                  >
+                    <Import className='size-4' />
+                  </NavigationButton>
+                </Dialog.Trigger>
 
-              <NavigationButton 
-                onClick={() => {}}
-                selected={false}
-                title='Importar'
-              >
-                <Import className='size-4' />
-              </NavigationButton>
+                <Dialog.DialogPortal>
+                  <Dialog.DialogOverlay className="fixed inset-0 bg-black/70" />
+                  <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
+                    <div className="space-y-3">
+                      <Dialog.Title className="text-xl font-bold text-white"> Importar filmes ou avaliações </Dialog.Title>
+                      <Dialog.Description className='text-sm text-zinc-500'> Por favor, escolha o tipo de importação e busque o arquivo. </Dialog.Description>
+                    </div>
+
+                    <ImportFile />
+                  </Dialog.Content>
+                </Dialog.DialogPortal>
+              </Dialog.Root>              
             </div>
           </nav>
           <div className='w-full h-0.5 bg-zinc-500 mt-1 mb-5' />
