@@ -19,6 +19,7 @@ type AddMovieScoreSchema = z.infer<typeof addMovieScoreSchema>
 
 export function AddMovieScore ({movies}: AddMovieScoreProps) {
   const queryClient = useQueryClient()  
+  const token = JSON.parse(localStorage.getItem("token") ?? "")
 
   const {register, handleSubmit, formState, watch} = useForm<AddMovieScoreSchema>({
     resolver: zodResolver(addMovieScoreSchema)
@@ -33,13 +34,17 @@ export function AddMovieScore ({movies}: AddMovieScoreProps) {
           score: +score
         }),   
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }      
       })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['get-movies', 'get-user-movies']
+        queryKey: ['get-movies']
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['get-user-movies']
       })
     }
   })

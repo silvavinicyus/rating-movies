@@ -14,7 +14,8 @@ type AddMovieSchema = z.infer<typeof addMovieSchema>
 
 export function AddMovie() {
   const queryClient = useQueryClient()
-
+  const token = JSON.parse(localStorage.getItem("token") ?? "")
+  
   const { register, handleSubmit, formState } = useForm<AddMovieSchema>({
     resolver: zodResolver(addMovieSchema)
   })
@@ -28,7 +29,8 @@ export function AddMovie() {
           director
         }),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         } 
       })
     },

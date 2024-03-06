@@ -8,19 +8,40 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { IMovieResponse } from '../interfaces/responses'
 import * as Dialog from '@radix-ui/react-dialog'
 import { AddMovie } from '../components/add-movie'
+import { useNavigate } from 'react-router-dom'
+import { IUser } from '../interfaces/user'
+import { useAuth } from '../hooks/auth'
 
 
 
-export function Home() {  
-  const [mainComponent, setMainComponent] = useState('grid')  
+export function Home() {
+  const [mainComponent, setMainComponent] = useState('grid')
+  const navigate = useNavigate()
+  const { logout } = useAuth()
+  
+  const user = JSON.parse(localStorage.getItem("user") ?? "") as IUser
+  const token = JSON.parse(localStorage.getItem("token") ?? "")
+
+  if(!user || !token) {
+    navigate("/")
+  }
 
   function handleMainComponent(component: string) {
     component === 'grid' ? setMainComponent('grid') : setMainComponent('rating')
   }
 
+  async function handleLogout (){
+    await logout()
+    navigate('/')
+  }
+
   const {data: moviesResponse} = useQuery<IMovieResponse>({
     queryFn: async () => {
-      const response = await fetch('http://localhost:3000/movies')
+      const response = await fetch('http://localhost:3000/movies', {        
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
       const data = await response.json()
 
       return data
@@ -28,196 +49,6 @@ export function Home() {
     queryKey: ['get-movies'],
     placeholderData: keepPreviousData
   })
-
-  console.log(moviesResponse)
-  const movies = [
-    {
-      "id": 1,
-      "title": "Joao",
-      "director": "Joao",
-      "created_at": "2024-02-29T00:32:48.651Z",
-      "updated_at": "2024-02-29T00:32:48.651Z",
-      "score": 3.7
-    },
-    {
-      "id": 2,
-      "title": "The Shawshank Redemption",
-      "director": "Frank Darabont",
-      "created_at": "2024-02-29T01:31:12.129Z",
-      "updated_at": "2024-02-29T01:31:12.129Z",
-      "score": 7.0
-    },
-    {
-      "id": 3,
-      "title": "The Godfather",
-      "director": "Francis Ford Coppola",
-      "created_at": "2024-02-29T01:31:12.136Z",
-      "updated_at": "2024-02-29T01:31:12.136Z",
-      "score": 3.0
-    },
-    {
-      "id": 4,
-      "title": "The Dark Knight",
-      "director": "Christopher Nolan",
-      "created_at": "2024-02-29T01:31:12.139Z",
-      "updated_at": "2024-02-29T01:31:12.139Z",
-      "score": 8.0
-    },
-    {
-      "id": 5,
-      "title": "Pulp Fiction",
-      "director": "Quentin Tarantino",
-      "created_at": "2024-02-29T01:31:12.141Z",
-      "updated_at": "2024-02-29T01:31:12.141Z",
-      "score": 2.0
-    },
-    {
-      "id": 6,
-      "title": "Schindler's List",
-      "director": "Steven Spielberg",
-      "created_at": "2024-02-29T01:31:12.142Z",
-      "updated_at": "2024-02-29T01:31:12.142Z",
-      "score": 9.0
-    },
-    {
-      "id": 7,
-      "title": "Inception",
-      "director": "Christopher Nolan",
-      "created_at": "2024-02-29T01:31:12.144Z",
-      "updated_at": "2024-02-29T01:31:12.144Z",
-      "score": 4.0
-    },
-    {
-      "id": 8,
-      "title": "Fight Club",
-      "director": "David Fincher",
-      "created_at": "2024-02-29T01:31:12.146Z",
-      "updated_at": "2024-02-29T01:31:12.146Z",
-      "score": 6.0
-    },
-    {
-      "id": 9,
-      "title": "Forrest Gump",
-      "director": "Robert Zemeckis",
-      "created_at": "2024-02-29T01:31:12.148Z",
-      "updated_at": "2024-02-29T01:31:12.148Z",
-      "score": 10.0
-    },
-    {
-      "id": 10,
-      "title": "The Matrix",
-      "director": "The Wachowskis",
-      "created_at": "2024-02-29T01:31:12.149Z",
-      "updated_at": "2024-02-29T01:31:12.149Z",
-      "score": 1.0
-    },
-    {
-      "id": 11,
-      "title": "The Lord of the Rings: The Fellowship of the Ring",
-      "director": "Peter Jackson",
-      "created_at": "2024-02-29T01:31:12.151Z",
-      "updated_at": "2024-02-29T01:31:12.151Z",
-      "score": 6.0
-    },
-    {
-      "id": 12,
-      "title": "Goodfellas",
-      "director": "Martin Scorsese",
-      "created_at": "2024-02-29T01:31:12.152Z",
-      "updated_at": "2024-02-29T01:31:12.152Z",
-      "score": 4.0
-    },
-    {
-      "id": 13,
-      "title": "The Silence of the Lambs",
-      "director": "Jonathan Demme",
-      "created_at": "2024-02-29T01:31:12.154Z",
-      "updated_at": "2024-02-29T01:31:12.154Z",
-      "score": 2.0
-    },
-    {
-      "id": 14,
-      "title": "The Usual Suspects",
-      "director": "Bryan Singer",
-      "created_at": "2024-02-29T01:31:12.155Z",
-      "updated_at": "2024-02-29T01:31:12.155Z",
-      "score": 7.0
-    },
-    {
-      "id": 15,
-      "title": "Se7en",
-      "director": "David Fincher",
-      "created_at": "2024-02-29T01:31:12.161Z",
-      "updated_at": "2024-02-29T01:31:12.161Z",
-      "score": 5.0
-    },
-    {
-      "id": 16,
-      "title": "The Godfather: Part II",
-      "director": "Francis Ford Coppola",
-      "created_at": "2024-02-29T01:31:12.163Z",
-      "updated_at": "2024-02-29T01:31:12.163Z",
-      "score": 3.0
-    },
-    {
-      "id": 17,
-      "title": "The Lord of the Rings: The Return of the King",
-      "director": "Peter Jackson",
-      "created_at": "2024-02-29T01:31:12.165Z",
-      "updated_at": "2024-02-29T01:31:12.165Z",
-      "score": 8.0
-    },
-    {
-      "id": 18,
-      "title": "City of God",
-      "director": "Fernando Meirelles",
-      "created_at": "2024-02-29T01:31:12.168Z",
-      "updated_at": "2024-02-29T01:31:12.168Z",
-      "score": 9.0
-    },
-    {
-      "id": 19,
-      "title": "Interstellar",
-      "director": "Christopher Nolan",
-      "created_at": "2024-02-29T01:31:12.170Z",
-      "updated_at": "2024-02-29T01:31:12.170Z",
-      "score": 10.0
-    },
-    {
-      "id": 20,
-      "title": "Saving Private Ryan",
-      "director": "Steven Spielberg",
-      "created_at": "2024-02-29T01:31:12.172Z",
-      "updated_at": "2024-02-29T01:31:12.172Z",
-      "score": 1.0
-    },
-    {
-      "id": 21,
-      "title": "The Green Mile",
-      "director": "Frank Darabont",
-      "created_at": "2024-02-29T01:31:12.174Z",
-      "updated_at": "2024-02-29T01:31:12.174Z",
-      "score": 1.0
-    },
-    {
-      "id": 22,
-      "title": "The Shawshank Redemption",
-      "director": "Frank Darabont",
-      "created_at": "2024-02-29T01:31:36.907Z",
-      "updated_at": "2024-02-29T01:31:36.907Z",
-      "score": 10.0
-    },
-    {
-      "id": 123,
-      "title": "The Godfather",
-      "director": "Francis Ford Coppola",
-      "created_at": "2024-02-29T01:34:43.335Z",
-      "updated_at": "2024-02-29T01:34:43.335Z",
-      "score": 6.0
-    }
-  ]
-
-  
 
   return (    
       <div className="h-screen flex flex-col max-w-[1200px] mx-auto justify-between py-4">
@@ -231,12 +62,13 @@ export function Home() {
 
           <div className='flex gap-3 items-center'>
             <div className='flex flex-col items-center w-28 gap-1.5'>
-              <span className='text-base text-white font-bold'> Vinícyus Silva</span>
-              <span className='text-xs text-zinc-300'> silvavinicyus </span>
+              <span className='text-base text-white font-bold'> { user.username } </span>
+              <span className='text-xs text-zinc-300'> { user.email } </span>
             </div>
 
             <button
               className='w-20 bg-red-400 rounded-full text-white flex gap-2 justify-center items-center ml-5 h-9 hover:bg-red-400/85'
+              onClick={handleLogout}
             > 
               Sair 
               <LogOut className='size-4'/>
@@ -305,10 +137,10 @@ export function Home() {
           <div className='w-full h-0.5 bg-zinc-500 mt-1 mb-5' />
 
           <div className='flex w-full justify-center'>
-            {
+            {              
               mainComponent === 'grid' 
-              ? <GridTable movies={movies} /> 
-              : <Rating movies={movies}  />
+              ? <GridTable movies={moviesResponse} /> 
+              : <Rating movies={moviesResponse}  />
             }                              
           </div>
         </main>

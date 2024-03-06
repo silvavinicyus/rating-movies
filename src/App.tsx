@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import OxeanLogo from './assets/oxean-logo-white.svg'
+import { useAuth } from "./hooks/auth"
 
 const loginSchema = z.object({
   email: z.string(),
@@ -14,6 +15,7 @@ type LoginSchema = z.infer<typeof loginSchema>
 
 function App() {
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   const { register, handleSubmit, formState } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema)
@@ -30,11 +32,17 @@ function App() {
         headers: {
           'Content-Type': 'application/json'
         } 
-      })  
-
+      })    
+    
       if (result.status === 202) {
-        navigate('/home')        
-      }
+        const data = await result.json()                  
+        
+        await login({
+          user: data.user,
+          token: data.token
+        })
+        navigate("/home")
+      }                  
     } catch(err) {
       console.log(err)
     }
