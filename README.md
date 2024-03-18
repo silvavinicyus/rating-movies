@@ -70,3 +70,53 @@ Requisitos
 ![image](https://github.com/silvavinicyus/rating-movies/assets/24615008/0e7aac20-5740-45ed-8082-28ac131b1950)
 
 * O sistema então processará a importação e em alguns segundos aparecerá na tela inicial os novos dados.
+
+
+ ### Sobre a Importação
+
+ #### Filmes
+ Para a importação dos filmes, o formato aceito é o de JSON, e o JSON deve seguir o seguinte padrão:  
+ 
+    {
+	   "movies": [
+          {
+              "title": "The Shawshank Redemption",
+              "director": "Frank Darabont"
+          },
+          {
+              "title": "The Godfather",
+              "director": "Francis Ford Coppola"
+          },
+          ...
+      ]
+    }
+  
+### Avaliaçãoes de filmes
+Para a importação das avaliações, o formato aceito também é o de JSON, e o JSON deve seguir o seguinte padrão:
+
+    {
+	   "user_movies": [
+            {
+                    "movie_id": 1,
+   			"score": 5
+   		},
+   		{
+   			"movie_id": 2,
+   			"score": 7
+   		},
+   		{
+   			"movie_id": 3,
+   			"score": 3
+   		},
+   		{
+   			"movie_id": 4,
+   			"score": 8
+   		},
+         ...
+      ]
+    }
+
+    
+#### Arquivos prontos
+Caso queira, há agora 2 arquivos <a href="https://github.com/silvavinicyus/ratting-movies-backend/tree/main/jsons"> aqui </a> que contém exemplos de arquivos de importação para filmes (movies.json) e para notas (movies_scores.json)
+
