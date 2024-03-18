@@ -52,7 +52,7 @@ Requisitos
 
  Para utilizar o sistema, utilize o usuário padrão criado com os seeds do rails:
 
- email: admin@rotten.com
+ email: admin@rotten.com <br>
  password: admin
 
 
