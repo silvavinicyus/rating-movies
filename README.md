@@ -46,3 +46,27 @@ Requisitos
 
      npm run dev   
  </li>
+
+
+ ### Seed
+
+ Para utilizar o sistema, utilize o usuário padrão criado com os seeds do rails:
+
+ email: admin@rotten.com
+ password: admin
+
+
+ ### Importação de dados
+
+ Para fazer a importação de filmes e notas, execute os seguintes passos:
+
+ * Faça login na aplicação, com o usuário e senha citado acima
+
+ * Na página inicial, seleciona a opção "Importar"
+![image](https://github.com/silvavinicyus/rating-movies/assets/24615008/10a09089-9dae-4f97-8ca0-1d266ed04cb8)
+
+ * No modal aberto, escolha a opção de importação desejada (Filmes ou notas) e clique em "Save"
+
+![image](https://github.com/silvavinicyus/rating-movies/assets/24615008/0e7aac20-5740-45ed-8082-28ac131b1950)
+
+* O sistema então processará a importação e em alguns segundos aparecerá na tela inicial os novos dados.
